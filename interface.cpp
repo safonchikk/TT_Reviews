@@ -13,21 +13,25 @@ struct Input_data{
   vector <pair <int, int> > vertices;
 };
 
+struct Vertex{
+  int start_node, finish_node;
+};
+
 class Matrix {
  private:
-  int nodes;
+  int matrix_size;
   vector <vector<int64_t>> matrix;
 
   //умножение матриц
-  void multiply(const Matrix& other_matrix);
+  void multiply(const Matrix &other_matrix);
 
   //из списка смежности в матрицу смежности
-  void vertices_to_matrix(const vector <pair <int, int> > &vertices);
+  void vertices_to_matrix(const vector <Vertex> &vertices);
 
  public:
-  explicit Matrix(int node_number);
+  explicit Matrix(const int matrix_size);
 
-  explicit Matrix(const Input_data &data);
+  explicit Matrix(const Input_data &labyrinth_parameters);
 
   //конструктор копирования
   Matrix(const Matrix& other_matrix);
@@ -36,24 +40,24 @@ class Matrix {
   const int64_t first_row_sum();
 
   //двоичное возведение в степень
-  void binary_power(int pow);
+  void calculate_matrix_power(int power);
 };
 
 //функция считающая пути (решающая задачу)
-int64_t count_ways(const Input_data &data);
+int64_t count_ways(const Input_data &labyrinth_parameters);
 
 //ввод
 Input_data read(std::istream& in);
 
 //вывод ответа
-void write(std::ostream& out, int64_t number_of_ways);
+void write(std::ostream& out, const int64_t number_of_ways);
 
 int main(){
   std::ios_base::sync_with_stdio(false);
   cin.tie(0);
   cout.tie(0);
-  const auto &data = read(cin);
-  int64_t number_of_ways = count_ways(data);
+  const auto &labyrinth_parameters = read(cin);
+  int64_t number_of_ways = count_ways(labyrinth_parameters);
   write(cout, number_of_ways);
   return 0;
 }
