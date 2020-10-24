@@ -9,11 +9,11 @@ using std::pair;
 const int64_t MODULUS = 1000000007;
 
 struct Input_data{
-  int64_t node_number, moves_number;
-  vector <pair <int, int> > vertices;
+  int64_t nodes_number, moves_number;
+  vector <Vertex> edges;
 };
 
-struct Vertex{
+struct Edge{
   int start_node, finish_node;
 };
 
@@ -26,7 +26,7 @@ class Matrix {
   void multiply(const Matrix &other_matrix);
 
   //из списка смежности в матрицу смежности
-  void vertices_to_matrix(const vector <Vertex> &vertices);
+  void edges_to_matrix(const vector <Edge> &edges);
 
  public:
   explicit Matrix(const int matrix_size);
@@ -57,7 +57,7 @@ int main(){
   cin.tie(0);
   cout.tie(0);
   const auto &labyrinth_parameters = read(cin);
-  int64_t number_of_ways = count_ways(labyrinth_parameters);
+  const int64_t number_of_ways = count_ways(labyrinth_parameters);
   write(cout, number_of_ways);
   return 0;
 }
